@@ -18,7 +18,8 @@ public class UserMenu {
 		System.out.println("1: View Balance");
 		System.out.println("2: Make Deposit");
 		System.out.println("3: Take Withdrawl");
-		System.out.println("4: Logout");
+		System.out.println("4: View Transaction History");
+		System.out.println("5: Logout");
 		
 		String userMenuSelection = sc.nextLine();
 		
@@ -34,13 +35,15 @@ public class UserMenu {
 				TerminalActions.takeWithdrawl(user);
 				break;
 			case "4":
+				TerminalActions.viewTransactionHistory(user);
+				break;
+			case "5":
 				TerminalActions.exit();
 			default:
 				System.out.println("Invalid input");
 				mainMenu(user);
 			}
 		} catch (InvalidSelectionException e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 			mainMenu(user);
 		}

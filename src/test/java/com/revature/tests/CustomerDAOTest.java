@@ -19,6 +19,7 @@ public class CustomerDAOTest {
 	public void setUpUserObject() {
 	}
 	
+	
 	@Test
 	public void returnUserWithUsernameMatch() {
 		CustomerDAO cDAO = new CustomerDAOimpPJDBC();

@@ -1,6 +1,5 @@
 package com.revature.repository;
 
-import com.revature.controller.CreateUser;
 import com.revature.model.User;
 
 public interface CustomerDAO {

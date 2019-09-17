@@ -110,7 +110,7 @@ public class CustomerDAOimpPJDBC implements CustomerDAO {
 		
 		try {
 			conn = ConnectionUtil.getConnection();
-			System.out.println(username + " & " + password);
+			//System.out.println(username + " & " + password);
 			stmt = conn.prepareStatement("SELECT * FROM postgres.project0.customer WHERE username =? AND password=?;");
 			stmt.setString(1, username);
 			stmt.setString(2, password);

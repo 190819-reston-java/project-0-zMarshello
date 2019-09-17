@@ -2,8 +2,10 @@ package com.revature.controller;
 
 import java.util.Scanner;
 
-
-import com.revature.service.DAOActions;
+import com.revature.model.User;
+import com.revature.repository.CustomerDAO;
+import com.revature.repository.CustomerDAOimpPJDBC;
+import com.revature.service.CreateUser;
 import com.revature.service.Login;
 
 public class InitiationScreen {
@@ -18,14 +20,15 @@ public class InitiationScreen {
 		String userSelection = sc.nextLine();
 		
 		switch(userSelection) {
-		case "1":
-			UserMenu.mainMenu(DAOActions.createCustomerDAOGetCustomerDAO(CreateUser.createUser()));
-			
+		case "1":			
+			String un = CreateUser.createUser().getUsername();
+			CustomerDAO dao = new CustomerDAOimpPJDBC();
+			User user = dao.getUserDAO(un);			
+			UserMenu.mainMenu(user);			
 			break;
 		case "2":
 			Login log = new Login();
-			log.loginAttempt();
-			
+			log.loginAttempt();			
 			break;
 		default:
 			System.out.println("Invalid Selection. Try again.");

@@ -1,24 +1,28 @@
 package com.revature.model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.text.DecimalFormat;
 
-public class TransactionHistory {
+public class Transaction {
 
 	int transactionID;
-	private Date transactionDate = new Date();
+	private String transactionDate;
 	private double transactionAmmount;
 	private String transactionType;
+	private int customerId;
+	
+	public Transaction() {
+		
+	}
 
 	
-	public TransactionHistory(int transactionID, Date transactionDate, double transactionAmmount,
-			String transactionType) {
+	public Transaction(int transactionID, String transactionDate, double transactionAmmount,
+			String transactionType, int customerId) {
 		super();
 		this.transactionID = transactionID;
 		this.transactionDate = transactionDate;
 		this.transactionAmmount = transactionAmmount;
 		this.transactionType = transactionType;
+		this.customerId = customerId;
 	}
 	public int getTransactionID() {
 		return transactionID;
@@ -26,10 +30,10 @@ public class TransactionHistory {
 	public void setTransactionID(int transactionID) {
 		this.transactionID = transactionID;
 	}
-	public Date getTransactionDate() {
+	public String getTransactionDate() {
 		return transactionDate;
 	}
-	public void setTransactionDate(Date transactionDate) {
+	public void setTransactionDate(String transactionDate) {
 		this.transactionDate = transactionDate;
 	}
 	
@@ -45,5 +49,13 @@ public class TransactionHistory {
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
 	}
+	@Override
+	public String toString() {
+		DecimalFormat df2 = new DecimalFormat("#.00");
+		return "Transaction ID: " + transactionID + ", Transaction Date: " + transactionDate
+				+ ", Transaction Ammount: $" + df2.format(transactionAmmount) + ", Transaction Type: " + transactionType
+				+ ", Customer ID: " + customerId;
+	}
+	
 	
 }
