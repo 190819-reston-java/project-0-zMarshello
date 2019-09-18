@@ -14,11 +14,24 @@ public class TerminalActionsTest {
 	}
 	
 	@Test
-	public void testInputSanitize() {
+	public void sanitizeNumber() {
 		String s = "$120,000.50";
 		Double d = Double.valueOf(TerminalActions.inputSanitize(s));
 		System.out.println(d);
-		
+	}
+	
+	@Test
+	public void sanitizeNegetiveNumberInput() {
+		String s = "-12000.00";
+		Double d = Double.valueOf(TerminalActions.inputSanitize(s));
+		System.out.println(d);
+	}
+	
+	@Test(expected = NumberFormatException.class)
+	public void sanitizeNonNumberInput() {
+		String s = "Seven Thousand";
+		Double d = Double.valueOf(TerminalActions.inputSanitize(s));
+		System.out.println(d);
 	}
 	
 	

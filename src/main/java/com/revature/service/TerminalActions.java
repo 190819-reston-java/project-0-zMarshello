@@ -5,6 +5,9 @@ import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
+import com.revature.controller.InitiationScreen;
 import com.revature.controller.UserMenu;
 import com.revature.exception.InvalidInputException;
 import com.revature.model.Transaction;
@@ -19,6 +22,7 @@ public class TerminalActions {
 	private static CustomerDAO dao = new CustomerDAOimpPJDBC();
 	private static DecimalFormat df2 = new DecimalFormat("#.00");
 	private static TransactionDAO transDao = new TransactionDaoTjdbc();
+	public static Logger logger = Logger.getLogger(TerminalActions.class);
 	
 	
 	public static void exit() {
@@ -42,7 +46,7 @@ public class TerminalActions {
 		
 		System.out.println("Hello, please enter the amount you would like to withdrawl.");
 		double userWithdrawlAmmount = Double.parseDouble(inputSanitize(sc.nextLine()));
-		
+		logger.debug("Received user input: " + userWithdrawlAmmount);
 		try {
 			if (overdraftCheck(balance, userWithdrawlAmmount)) {
 				Date date = new Date();
@@ -57,7 +61,7 @@ public class TerminalActions {
 			}else {
 				UserMenu.mainMenu(passedUser);
 			}
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			e.printStackTrace();
 		} 
 		
@@ -74,6 +78,7 @@ public class TerminalActions {
 		System.out.println("Hello, please enter the ammount you would like to deposit below.");
 		System.out.print("Ammount to deposit: ");
 		double userDepositAmmount = Double.parseDouble(inputSanitize(sc.nextLine()));
+		logger.debug("Received user input: " + userDepositAmmount);
 		passedUser.setBalance(balance += userDepositAmmount); 
 		trans.setTransactionAmmount(userDepositAmmount);
 		trans.setTransactionDate(new Timestamp(date.getTime()).toString());
@@ -130,7 +135,6 @@ public class TerminalActions {
 	}
 	
 	public static String inputSanitize(String s) {
-		
 		StringBuilder sb = new StringBuilder();
 		String[] strArray = s.split("");
 		String[] sNumArray = {"0","1","2","3","4","5","6","7","8","9", "."};

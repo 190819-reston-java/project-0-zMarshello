@@ -2,6 +2,9 @@ package com.revature.service;
 
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
+import com.revature.controller.InitiationScreen;
 import com.revature.controller.UserMenu;
 import com.revature.model.User;
 import com.revature.repository.CustomerDAO;
@@ -12,10 +15,9 @@ public class Login {
 	private String enteredUsername;
 	private String enteredPassword;
 	private boolean loggedIn = false;
-	
 	User user = new User();
-	
 	int failedLoginAttemptCounter = 0;
+	private static Logger logger = Logger.getLogger(InitiationScreen.class);
 	
 	private static Scanner sc = new Scanner(System.in);
 
@@ -27,16 +29,13 @@ public class Login {
 		} else {
 			unseccessfulLogin();
 		}
-		
 	}
-	
-	
-	
 	private void unseccessfulLogin() {
 		failedLoginAttemptCounter++;
 		if (failedLoginAttemptCounter > 4) {
 			System.out.println("You have failed login too many times! Your account it temporarilly locked.");
 			System.out.println("Please try agian in 15 minutes. Goodbye.");
+			logger.fatal("Failed to recognize option 5 times, exiting");
 			System.exit(1);
 		}
 		System.out.println("Your Username and/or Password did not match our records.");
@@ -54,7 +53,9 @@ public class Login {
 		System.out.println("Please enter your username and password below.");
 		System.out.print("Username: ");
 		this.enteredUsername = sc.nextLine();
+		logger.debug("Received user input: " + this.enteredUsername);
 		System.out.print("Password: ");
+		logger.debug("Received user input: " + this.enteredPassword);
 		this.enteredPassword = sc.nextLine();
 	}
 	

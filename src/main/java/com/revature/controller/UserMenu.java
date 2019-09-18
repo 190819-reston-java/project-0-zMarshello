@@ -3,6 +3,8 @@ package com.revature.controller;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
+import org.apache.log4j.Logger;
+
 import com.revature.exception.InvalidSelectionException;
 import com.revature.model.User;
 import com.revature.service.TerminalActions;
@@ -10,6 +12,7 @@ import com.revature.service.TerminalActions;
 public class UserMenu {
 	
 	private static Scanner sc = new Scanner(System.in);
+	public static Logger logger = Logger.getLogger(UserMenu.class);
 	
 	public static void mainMenu(User user) {
 		System.out.println("Hello " + user.getName().toUpperCase() + "!");
@@ -22,6 +25,7 @@ public class UserMenu {
 		System.out.println("5: Logout");
 		
 		String userMenuSelection = sc.nextLine();
+		logger.debug("Received user input: " + userMenuSelection);
 		
 		try {
 			switch(userMenuSelection) {

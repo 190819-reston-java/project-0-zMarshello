@@ -6,7 +6,7 @@ public class User {
 	private String name;
 	private String username;
 	private String password;
-	private double balance;
+	private double balance = 0.00;
 	
 	
 	

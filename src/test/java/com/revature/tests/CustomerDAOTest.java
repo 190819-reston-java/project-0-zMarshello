@@ -29,6 +29,15 @@ public class CustomerDAOTest {
 		assertTrue((cDAO.getUserDAO(u.getUsername())).getUsername().equals(username));
 	}
 	
+	@Test(expected = NullPointerException.class)
+	public void returnsNullValue() {
+		CustomerDAO cDAO = new CustomerDAOimpPJDBC();
+		User u = new User();
+		u.setUsername("marsh");
+		cDAO.getUserDAO(u.getUsername()).equals(null);
+	}
+	
+	
 	@After
 	public void tearDown() {
 	}
